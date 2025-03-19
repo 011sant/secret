@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { ProductCard } from '@/components/ProductCard';
 
 // Animações para elementos que aparecem
 const fadeInUp = {
@@ -500,6 +501,34 @@ export default function ProdutoPage() {
               ))}
             </div>
           </motion.div>
+
+          {/* Product Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <ProductCard 
+              title="Analytics" 
+              description="Dados transformados em insights estratégicos para impulsionar suas decisões de negócio com precisão." 
+              icon={<span className="text-white text-2xl">📊</span>} 
+              link="#analytics" 
+            />
+            <ProductCard 
+              title="ChatBots" 
+              description="Assistentes virtuais inteligentes que otimizam seu atendimento e convertem visitantes em clientes." 
+              icon={<span className="text-white text-2xl">💬</span>} 
+              link="#chatbots" 
+            />
+            <ProductCard 
+              title="Gestão Financeira" 
+              description="Simplifique sua gestão financeira com ferramentas intuitivas para controle de receitas e despesas." 
+              icon={<span className="text-white text-2xl">💰</span>} 
+              link="#financeiro" 
+            />
+            <ProductCard 
+              title="Automação" 
+              description="Automatize processos repetitivos e libere sua equipe para focar no que realmente importa." 
+              icon={<span className="text-white text-2xl">🔄</span>} 
+              link="#automacao" 
+            />
+          </div>
         </div>
       </div>
     </div>
