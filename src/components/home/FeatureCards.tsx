@@ -1,7 +1,17 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  FeatureSection,
+  FeatureContainer,
+  FeatureGrid,
+  FeatureCardWrapper,
+  StyledCard,
+  IconWrapper,
+  CardTitle,
+  CardDescription,
+  ExpandedContent
+} from './FeatureCards/styles';
 
 const featureData = [
   {
@@ -26,37 +36,42 @@ const featureData = [
 
 const FeatureCards = () => {
   return (
-    <section className="py-16 bg-white dark:bg-roxo-escuro">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <FeatureSection>
+      <FeatureContainer>
+        <FeatureGrid>
           {featureData.map((feature, index) => (
-            <motion.div
+            <FeatureCardWrapper
               key={index}
-              className="card group relative overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10 }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.1,
+                ease: [0.25, 0.1, 0.25, 1]
+              }}
+              viewport={{ once: true, margin: "-50px" }}
+              whileHover={{ 
+                y: -10,
+                transition: { duration: 0.2 }
+              }}
             >
-              <div className="flex flex-col h-full">
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold mb-2 text-roxo-medio">{feature.title}</h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">{feature.description}</p>
+              <StyledCard>
+                <IconWrapper>{feature.icon}</IconWrapper>
+                <CardTitle>{feature.title}</CardTitle>
+                <CardDescription>{feature.description}</CardDescription>
                 
-                {/* Conteúdo expandido em hover */}
-                <div className="absolute inset-0 bg-white dark:bg-roxo-escuro p-6 flex flex-col justify-center transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
-                  <div className="text-5xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-bold mb-2 text-roxo-medio">{feature.title}</h3>
-                  <p className="text-gray-700 dark:text-gray-300">{feature.details}</p>
-                </div>
-              </div>
-            </motion.div>
+                <ExpandedContent>
+                  <IconWrapper>{feature.icon}</IconWrapper>
+                  <CardTitle>{feature.title}</CardTitle>
+                  <CardDescription>{feature.details}</CardDescription>
+                </ExpandedContent>
+              </StyledCard>
+            </FeatureCardWrapper>
           ))}
-        </div>
-      </div>
-    </section>
+        </FeatureGrid>
+      </FeatureContainer>
+    </FeatureSection>
   );
 };
 
-export default FeatureCards; 
+export default FeatureCards;

@@ -3,142 +3,92 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-const Navbar = () => {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white dark:bg-roxo-escuro shadow-md">
+    <header className="bg-gradient-primary shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0">
-              <span className="text-2xl font-bold text-roxo-medio">
-                SPECTER
-              </span>
-            </Link>
-            
-            <div className="hidden md:block ml-10">
-              <div className="flex items-center space-x-4">
-                <Link href="/" className="text-gray-700 dark:text-white hover:text-roxo-medio px-3 py-2 rounded-md text-sm font-medium">
-                  Início
-                </Link>
-                <Link href="/marketplace" className="text-gray-700 dark:text-white hover:text-roxo-medio px-3 py-2 rounded-md text-sm font-medium">
-                  Marketplace
-                </Link>
-                <Link href="/assinaturas" className="text-gray-700 dark:text-white hover:text-roxo-medio px-3 py-2 rounded-md text-sm font-medium">
-                  Assinaturas
-                </Link>
-                <Link href="/produtos" className="text-gray-700 dark:text-white hover:text-roxo-medio px-3 py-2 rounded-md text-sm font-medium">
-                  Produtos
-                </Link>
-              </div>
-            </div>
-          </div>
-          
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-3">
-              <button className="text-gray-700 dark:text-white hover:text-roxo-medio px-3 py-2 rounded-md text-sm font-medium">
-                Entrar
-              </button>
-              <Link 
-                href="/dashboard" 
-                className="bg-gradient-principal text-white px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:shadow-lg"
-              >
-                Dashboard
-              </Link>
-            </div>
-          </div>
-          
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-white hover:text-roxo-medio focus:outline-none"
-            >
-              <svg
-                className={`${isMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-              <svg
-                className={`${isMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      {/* Menu móvel */}
-      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link 
-            href="/" 
-            className="text-gray-700 dark:text-white hover:text-roxo-medio block px-3 py-2 rounded-md text-base font-medium"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Início
+        <nav className="flex justify-between items-center py-5">
+          <Link href="/" className="flex items-center text-white text-2xl font-bold">
+            <span className="bg-white text-primary w-9 h-9 rounded-lg flex items-center justify-center mr-3 font-bold text-xl">
+              S
+            </span>
+            SPECTER
           </Link>
-          <Link 
-            href="/marketplace" 
-            className="text-gray-700 dark:text-white hover:text-roxo-medio block px-3 py-2 rounded-md text-base font-medium"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Marketplace
-          </Link>
-          <Link 
-            href="/assinaturas" 
-            className="text-gray-700 dark:text-white hover:text-roxo-medio block px-3 py-2 rounded-md text-base font-medium"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Assinaturas
-          </Link>
-          <Link 
-            href="/produtos" 
-            className="text-gray-700 dark:text-white hover:text-roxo-medio block px-3 py-2 rounded-md text-base font-medium"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Produtos
-          </Link>
-          <div className="pt-4 flex flex-col space-y-2">
-            <button 
-              className="text-gray-700 dark:text-white hover:text-roxo-medio px-3 py-2 rounded-md text-base font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Entrar
-            </button>
-            <Link 
-              href="/dashboard" 
-              className="bg-gradient-principal text-white px-4 py-2 rounded-md text-base font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Dashboard
-            </Link>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
-};
 
-export default Navbar; 
+          <div className="hidden md:flex items-center space-x-8">
+            <NavLink href="/produtos">Produtos</NavLink>
+            <NavLink href="/recursos">Recursos</NavLink>
+            <NavLink href="/empresa">Empresa</NavLink>
+            <NavLink href="/contato">Contato</NavLink>
+            <Link 
+              href="/login" 
+              className="bg-accent text-white px-6 py-2 rounded-full font-semibold hover:transform hover:-translate-y-1 transition-all duration-300"
+            >
+              Login
+            </Link>
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </nav>
+
+        {/* Mobile menu */}
+        {isMenuOpen && (
+          <div className="md:hidden py-4">
+            <div className="flex flex-col space-y-4">
+              <MobileNavLink href="/produtos" onClick={() => setIsMenuOpen(false)}>
+                Produtos
+              </MobileNavLink>
+              <MobileNavLink href="/recursos" onClick={() => setIsMenuOpen(false)}>
+                Recursos
+              </MobileNavLink>
+              <MobileNavLink href="/empresa" onClick={() => setIsMenuOpen(false)}>
+                Empresa
+              </MobileNavLink>
+              <MobileNavLink href="/contato" onClick={() => setIsMenuOpen(false)}>
+                Contato
+              </MobileNavLink>
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+}
+
+function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link 
+      href={href} 
+      className="text-white font-medium relative group"
+    >
+      {children}
+      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
+    </Link>
+  );
+}
+
+function MobileNavLink({ href, children, onClick }: { 
+  href: string; 
+  children: React.ReactNode;
+  onClick: () => void;
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className="text-white text-center py-2 hover:bg-white/10 rounded-md transition-colors"
+    >
+      {children}
+    </Link>
+  );
+}
